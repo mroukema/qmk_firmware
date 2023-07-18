@@ -2,8 +2,6 @@
 
 ![Explorer Pi](https://i.imgur.com/fRFAessh.jpg)
 
-
-
 A RP2040 based firmware for the [RxCT Explorer Keyboard](https://github.com/DreaM117er/Explorer-Keyboard-RxCT) by [@DreaM117er](https://github.com/DreaM117er)
 
 The RxCT Explorer is a semi modular and adjustable keywell style keyboard allowing users to explore and narrow down their preferences for this style of keyboard. 
