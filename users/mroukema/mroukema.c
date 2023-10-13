@@ -30,3 +30,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return process_record_keymap(keycode, record);
 };
 
+__attribute__ ((weak))
+void matrix_scan_keymap(void) {}
+
+void matrix_scan_user(void) {
+    if(get_highest_layer(layer_state) != default_layer_state && last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+        layer_move(default_layer_state);
+    }
+    matrix_scan_keymap();
+}

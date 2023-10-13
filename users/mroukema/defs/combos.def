@@ -8,17 +8,21 @@ COMB(   LGUIS_ESC,
         KC_ESC,
         KC_LGUI, KC_S
 )
-COMB(   SS_SYSTEM,
+COMB(   RO_SYSTEM,
         MO(SYSTEM),
-        KC_SPC, KC_RSFT
+        SH_OS, KC_RSFT
 )
-COMB(   LS_SYSTEM,
+COMB(   LO_SYSTEM,
+        MO(SYSTEM),
+        SH_OS, KC_LSFT
+)
+COMB(   SS_SYSTEM,
         MO(SYSTEM),
         KC_LSFT, KC_RSFT
 )
 COMB(   PANIC_RETURN,
         TO(RSTHD),
-        KC_LALT, KC_EQUAL
+        KC_LGUI, KC_MINS
 )
 
 SUBS(   OU_OU,
