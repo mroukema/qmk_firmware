@@ -36,6 +36,9 @@
         "backlight": false,
         "audio": false
     },
+    "oneshot": {
+        "timeout": 3000
+    },
     "layout_aliases": {
         "LAYOUT": "LAYOUT_split_3x6_6"
     },
