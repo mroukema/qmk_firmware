@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 enum layer_names {
     RSTHD = 0,
-    SYMBOLS,
     NUMPAD,
+    SYMBOLS,
     SYSTEM
 };
