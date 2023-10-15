@@ -8,6 +8,7 @@ COMB(   LGUIS_ESC,
         KC_ESC,
         KC_LGUI, KC_S
 )
+
 #ifdef SWAP_HANDS_ENABLE
 COMB(   RO_SYSTEM,
         MO(SYSTEM),
@@ -18,6 +19,7 @@ COMB(   LO_SYSTEM,
         SH_OS, KC_LSFT
 )
 #endif
+
 COMB(   SS_SYSTEM,
         MO(SYSTEM),
         KC_LSFT, KC_RSFT
