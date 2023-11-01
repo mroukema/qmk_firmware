@@ -35,7 +35,9 @@ void matrix_scan_keymap(void) {}
 
 void matrix_scan_user(void) {
     #ifdef TIMEOUT_TO_DEFAULT_LAYER
-    if(get_highest_layer(layer_state) != default_layer_state && last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+    if (get_highest_layer(layer_state) != default_layer_state &&
+        last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+
         layer_move(default_layer_state);
     }
     #endif
