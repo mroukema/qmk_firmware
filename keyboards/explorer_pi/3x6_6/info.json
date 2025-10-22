@@ -20,6 +20,9 @@
         },
         "soft_serial_pin": "GP1"
     },
+    "ws2812": {
+        "pin": "GP3"
+    },
     "usb": {
         "vid": "0xFEED",
         "pid": "0x7101",
@@ -31,7 +34,7 @@
         "console": false,
         "extrakey": true,
         "nkro": true,
-        "rgb_matrix": false,
+        "rgb_matrix": true,
         "rgblight": false,
         "backlight": false,
         "audio": false

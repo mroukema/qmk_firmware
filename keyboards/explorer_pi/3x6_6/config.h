@@ -17,3 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 #define EE_HANDS
+
+#define NOP_FUDGE 1
+#define RGBLED_NUM 1
+#define RGB_MATRIX_DEFAULT_ON true
+#define RGB_MATRIX_LED_COUNT 1
+#define RGB_MATRIX_DEFAULT_HUE 0
