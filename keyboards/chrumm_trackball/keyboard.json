@@ -27,7 +27,8 @@
         "rgb_matrix": false,
         "rgblight": false,
         "backlight": false,
-        "audio": false
+        "audio": false,
+        "pointing_device": true
     },
     "oneshot": {
         "timeout": 3000

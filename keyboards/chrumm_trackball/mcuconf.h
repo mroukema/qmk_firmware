@@ -1,5 +1,5 @@
 /*
-Copyright 2023 @mroukema
+Copyright 2025 @mroukema
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,22 +14,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
-#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_TIME 600
+#include_next <mcuconf.h>
 
-#define POINTING_DEVICE_INVERT_Y
-
-#define SPI_DRIVER SPID1
-#define SPI_SCK_PIN GP14
-#define SPI_MOSI_PIN GP15
-#define SPI_MISO_PIN GP12
-#define PMW33XX_CS_PIN GP13
-#define PMW33XX_LIFTOFF_DISTANCE 0x02
-
-#define ROTATIONAL_TRANSFORM_ANGLE 20
-
-#define SCROLL_DIVISOR_H 30.0
-#define SCROLL_DIVISOR_V 30.0
+#undef RP_SPI_USE_SPI1
+#define RP_SPI_USE_SPI1 TRUE
