@@ -7,7 +7,10 @@ CUSTOM_SHIFTABLE_KEYCODE(       KC_CMQM,
                                 KC_COMMA,
                                 KC_QUES
 )
-
+CUSTOM_SHIFTABLE_KEYCODE(       KC_SLGV,
+                                KC_SLSH,
+                                KC_GRAVE
+)
 /*
  * Parens/braces that shift to thier mirror
  * Special handling (record->tap.count) for mirrorable custom keycodes that are on mod tap keys
