@@ -28,7 +28,8 @@
         "rgblight": false,
         "backlight": false,
         "audio": false,
-        "pointing_device": true
+        "pointing_device": true,
+        "swap_hands": true
     },
     "oneshot": {
         "timeout": 3000
