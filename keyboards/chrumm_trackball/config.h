@@ -17,6 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+// RGB
+#define NOP_FUDGE 1
+#define RGB_MATRIX_DEFAULT_ON true
+#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR
+#define RGB_MATRIX_LED_COUNT 64
+#define RGB_MATRIX_DEFAULT_HUE 0
+
+
+// Trackball
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_TIME 600
 
