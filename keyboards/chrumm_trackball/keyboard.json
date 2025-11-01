@@ -18,9 +18,6 @@
         "pid": "0x7101",
         "device_version": "1.0.0"
     },
-    "mouse_key": {
-        "enabled": true
-    },
     "features": {
         "bootmagic": true,
         "command": false,
