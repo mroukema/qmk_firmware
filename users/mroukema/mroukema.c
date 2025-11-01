@@ -25,17 +25,21 @@ float scroll_accumulated_h = 0;
 float scroll_accumulated_v = 0;
 #endif
 
+__attribute__ ((weak))
+void keyboard_post_init_keymap(void) {}
+
 void keyboard_post_init_user(void) {
+    // Ensure RSTHD is default layer since GAMING is placed lower in stack to allow GAMING to tap/toggle into typing layer
     set_single_default_layer(RSTHD);
+    keyboard_post_init_keymap();
 }
 
 __attribute__ ((weak))
 void pointing_device_init_keymap(void) {}
 
 void pointing_device_init_user(void) {
-    pointing_device_set_cpi(1600);
-    set_auto_mouse_layer(MOUSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
-    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+    // set auto mouse layer here since layer enum not available at the time AUTO_MOUSE_DEFAULT_LAYER needs to be defined (in config.h of keymap/keyboard)
+    set_auto_mouse_layer(MOUSE);
     pointing_device_init_keymap();
 }
 __attribute__ ((weak))

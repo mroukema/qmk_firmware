@@ -17,6 +17,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mroukema.h"
 
+void pointing_device_init_keymap(void) {
+    pointing_device_set_cpi(1600);
+    #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+    set_auto_mouse_enable(true);
+    #endif
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [RSTHD] = LAYOUT(
     //|---------------------------------------------------------------------------------------------------------------------------------------|                      |---------------------------------------------------------------------------------------------------------------------|
