@@ -3,10 +3,19 @@ CUSTOM_SHIFTABLE_KEYCODE(       KC_DTEX,                // CUSTOM KEYCODE
                                 KC_DOT,                 // BASE KEYCODE
                                 KC_EXLM                 // SHIFTED KEYCODE
 )
+CUSTOM_SHIFTABLE_KEYCODE(       KC_EXDT,
+                                KC_EXLM,
+                                KC_DOT
+)
 CUSTOM_SHIFTABLE_KEYCODE(       KC_CMQM,
                                 KC_COMMA,
                                 KC_QUES
 )
+CUSTOM_SHIFTABLE_KEYCODE(       KC_QMCM,
+                                KC_QUES,
+                                KC_COMMA
+)
+
 
 CUSTOM_SHIFTABLE_KEYCODE(       KC_SLGV,
                                 KC_SLSH,
@@ -104,3 +113,8 @@ CUSTOM_SHIFTABLE_KEYCODE(       KC_KP_DOT_COMMA,
                                 KC_KP_DOT,
                                 KC_COMMA
 )
+
+#ifdef POINTING_DEVICE_ENABLE
+CUSTOM_KEYCODE(                 DRAG_SCROLL
+)
+#endif

@@ -48,7 +48,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_ARW_LEFT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_left, dance_left_finished, dance_left_reset),
     [TD_ARW_DOWN] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_down, dance_down_finished, dance_down_reset),
     [TD_ARW_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_right, dance_right_finished, dance_right_reset),
-    [CAPS_LOCK] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_capslock_finished, dance_capslock_reset)
+    [CAPS_LOCK] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_capslock_finished, dance_capslock_reset),
+    [RETURN_RSTHD] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_return_rsthd_finished, dance_return_rsthd_reset)
 };
 
 void on_dance_up(tap_dance_state_t *state, void *user_data) {
@@ -322,4 +323,34 @@ void dance_capslock_reset(tap_dance_state_t *state, void *user_data) {
             break;
     }
     dance_state[CAPS_LOCK].step = 0;
+}
+
+void dance_return_rsthd_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[RETURN_RSTHD].step = dance_step(state);
+    switch (dance_state[RETURN_RSTHD].step) {
+        case DOUBLE_HOLD:
+            set_single_default_layer(RSTHD);
+            layer_clear();
+            layer_on(RSTHD);
+            break;
+    }
+}
+void dance_return_rsthd_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    dance_state[RETURN_RSTHD].step = 0;
+}
+
+void dance_enter_gaming_finished(tap_dance_state_t *state, void *user_data) {
+    dance_state[ENTER_GAMING].step = dance_step(state);
+    switch (dance_state[ENTER_GAMING].step) {
+        case DOUBLE_HOLD:
+            set_single_default_layer(GAMING);
+            layer_clear();
+            layer_on(GAMING);
+            break;
+    }
+}
+void dance_enter_gaming_reset(tap_dance_state_t *state, void *user_data) {
+    wait_ms(10);
+    dance_state[ENTER_GAMING].step = 0;
 }

@@ -34,3 +34,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "lib/keymap_combos.h"
 #endif
+
+#ifdef POINTING_DEVICE_ENABLE
+/*
+ * https://docs.qmk.fm/features/pointing_device#pointing-device
+ */
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define AUTO_MOUSE_DEFAULT_LAYER MOUSE
+#define AUTO_MOUSE_TIME 500
+
+#define SCROLL_DIVISOR_H 10.0
+#define SCROLL_DIVISOR_V 10.0
+#endif

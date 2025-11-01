@@ -17,6 +17,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mroukema.h"
 
+#ifdef POINTING_DEVICE_ENABLE
+bool set_scrolling = false;
+
+// Variables to store accumulated scroll values
+float scroll_accumulated_h = 0;
+float scroll_accumulated_v = 0;
+#endif
+
 __attribute__ ((weak))
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   return true;
@@ -24,21 +32,80 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        #ifdef POINTING_DEVICE_ENABLE
+        DRAG_SCOLL:
+            set_scrolling = record->event.presssed;
+            break;
+        #endif
         default:
             process_custom_shifted_keys(keycode, record);
     }
     return process_record_keymap(keycode, record);
 };
 
+#ifdef POINTING_DEVICE_ENABLE
+__attribute__ ((weak))
+report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
+    return mouse_report;
+}
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    // Check if drag scrolling is active
+    if (set_scrolling) {
+        // Calculate and accumulate scroll values based on mouse movement and divisors
+        scroll_accumulated_h += (float)mouse_report.x / SCROLL_DIVISOR_H;
+        scroll_accumulated_v += (float)mouse_report.y / SCROLL_DIVISOR_V;
+
+        // Assign integer parts of accumulated scroll values to the mouse report
+        mouse_report.h = (int8_t)scroll_accumulated_h;
+        mouse_report.v = (int8_t)scroll_accumulated_v;
+
+        // Update accumulated scroll values by subtracting the integer parts
+        scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
+        scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
+
+        // Clear the X and Y values of the mouse report
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+    }
+    return pointing_device_task_keymap(mouse_report);
+}
+#endif
+
+__attribute__ ((weak))
+layer_state_t layer_state_set_keymap(layer_state_t state) {
+    return state
+}
+
+// Function to handle layer changes and disable drag scrolling when not in AUTO_MOUSE_DEFAULT_LAYER
+layer_state_t layer_state_set_user(layer_state_t state) {
+    // Disable set_scrolling if the current layer is not the AUTO_MOUSE_DEFAULT_LAYER
+    #ifdef POINTING_DEVICE_ENABLE
+    if (get_highest_layer(state) != AUTO_MOUSE_DEFAULT_LAYER) {
+        set_scrolling = false;
+    }
+    #endif
+    return layer_state_set_keymap(state);
+}
+
+
 __attribute__ ((weak))
 void matrix_scan_keymap(void) {}
 
 void matrix_scan_user(void) {
     #ifdef TIMEOUT_TO_DEFAULT_LAYER
-    if (get_highest_layer(layer_state) != default_layer_state &&
-        last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+    switch (get_highest_layer(layer_state)) {
+        default_layer_state:
+            break;
+        GAMING:
+            break;
+        MOUSE:
+            break;
+        default:
+            if(last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+                layer_move(default_layer_state);
+            }
 
-        layer_move(default_layer_state);
     }
     #endif
     matrix_scan_keymap();

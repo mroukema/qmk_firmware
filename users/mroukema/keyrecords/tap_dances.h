@@ -26,6 +26,8 @@ enum tap_dance_codes {
     TD_ARW_DOWN,
     TD_ARW_RIGHT,
     CAPS_LOCK,
+    RETURN_RSTHD,
+    ENTER_GAMING,
     TAP_CODES_COUNT
 };
 
@@ -65,3 +67,9 @@ void on_dance_nothing(tap_dance_state_t *state, void *user_data);
 
 void dance_capslock_finished(tap_dance_state_t *state, void *user_data);
 void dance_capslock_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_return_rsthd_finished(tap_dance_state_t *state, void *user_data);
+void dance_return_rsthd_reset(tap_dance_state_t *state, void *user_data);
+
+void dance_enter_gaming_finished(tap_dance_state_t *state, void *user_data);
+void dance_enter_gaming_reset(tap_dance_state_t *state, void *user_data);

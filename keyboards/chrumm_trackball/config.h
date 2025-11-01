@@ -26,9 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 // Trackball
-#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_TIME 600
-
 #define POINTING_DEVICE_INVERT_Y
 
 #define SPI_DRIVER SPID1
@@ -40,5 +37,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ROTATIONAL_TRANSFORM_ANGLE 20
 
-#define SCROLL_DIVISOR_H 30.0
-#define SCROLL_DIVISOR_V 30.0
+
