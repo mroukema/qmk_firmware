@@ -1,5 +1,5 @@
 /*
-Copyright 2023 @mroukema
+Copyright 2025 @mroukema
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,30 +16,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
-#include QMK_KEYBOARD_H
-#define LAYER_ENTRY KC_TRANSPARENT
 
-#include "keyrecords/layer_names.h"
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define AUTO_MOUSE_TIME 600
 
-// C Macro Magic to define custom keycode and accompanying switch statement for custom shift behaviour
-#include "lib/custom_keycodes.h"
 
-#ifdef TAP_DANCE_ENABLE
-#include "keyrecords/tap_dances.h"
-#endif
 
-#ifdef COMBO_ENABLE
-/*
- * https://docs.qmk.fm/#/feature_combo?id=dictionary-management
- */
-#include "lib/keymap_combos.h"
-#endif
 
-#ifdef POINTING_DEVICE_ENABLE
-/*
- * https://docs.qmk.fm/features/pointing_device#pointing-device
- */
 
-#define SCROLL_DIVISOR_H 30.0
-#define SCROLL_DIVISOR_V 30.0
-#endif

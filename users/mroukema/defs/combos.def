@@ -25,7 +25,7 @@ COMB(   SS_SYSTEM,
         KC_LSFT, KC_RSFT
 )
 COMB(   QT_SYSTEM,
-        MO(SYSTEM),
+        TT(SYSTEM),
         TT(NUMPAD), TT(SYMBOLS)
 )
 COMB(   PANIC_RETURN,

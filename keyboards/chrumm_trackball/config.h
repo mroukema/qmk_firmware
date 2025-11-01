@@ -12,7 +12,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+along with this program.  If not, see <http://www.gnu.org/licenses/>
 */
 
 #pragma once
@@ -36,5 +36,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PMW33XX_LIFTOFF_DISTANCE 0x02
 
 #define ROTATIONAL_TRANSFORM_ANGLE 20
-
 

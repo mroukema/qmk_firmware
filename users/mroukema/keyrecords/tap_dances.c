@@ -49,7 +49,8 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_ARW_DOWN] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_down, dance_down_finished, dance_down_reset),
     [TD_ARW_RIGHT] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_right, dance_right_finished, dance_right_reset),
     [CAPS_LOCK] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_capslock_finished, dance_capslock_reset),
-    [RETURN_RSTHD] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_return_rsthd_finished, dance_return_rsthd_reset)
+    [RETURN_RSTHD] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_return_rsthd_finished, dance_return_rsthd_reset),
+    [ENTER_GAMING] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_nothing, dance_enter_gaming_finished, dance_enter_gaming_reset)
 };
 
 void on_dance_up(tap_dance_state_t *state, void *user_data) {

@@ -25,18 +25,37 @@ float scroll_accumulated_h = 0;
 float scroll_accumulated_v = 0;
 #endif
 
+void keyboard_post_init_user(void) {
+    set_single_default_layer(RSTHD);
+}
+
+__attribute__ ((weak))
+void pointing_device_init_keymap(void) {}
+
+void pointing_device_init_user(void) {
+    set_auto_mouse_layer(MOUSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+    pointing_device_init_keymap();
+}
 __attribute__ ((weak))
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+    //process_auto_mouse(keycode, record);
+    #endif
     switch (keycode) {
         #ifdef POINTING_DEVICE_ENABLE
-        DRAG_SCOLL:
-            set_scrolling = record->event.presssed;
-            break;
+        case DRAG_SCROLL:
+            set_scrolling = record->event.pressed;
+            return false;
         #endif
+        case TO_DEFAULT:
+            layer_clear();
+            layer_move(default_layer_state);
+            break;
         default:
             process_custom_shifted_keys(keycode, record);
     }
@@ -70,42 +89,52 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     }
     return pointing_device_task_keymap(mouse_report);
 }
+
+bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch(keycode) {
+        case DRAG_SCROLL:
+            return true;
+        case KC_RIGHT ... KC_UP:
+            return true;
+        default:
+            return false;
+    }
+}
 #endif
 
 __attribute__ ((weak))
 layer_state_t layer_state_set_keymap(layer_state_t state) {
-    return state
+    return state;
 }
 
 // Function to handle layer changes and disable drag scrolling when not in AUTO_MOUSE_DEFAULT_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Disable set_scrolling if the current layer is not the AUTO_MOUSE_DEFAULT_LAYER
     #ifdef POINTING_DEVICE_ENABLE
-    if (get_highest_layer(state) != AUTO_MOUSE_DEFAULT_LAYER) {
+    if (get_highest_layer(state) != MOUSE) {
         set_scrolling = false;
     }
     #endif
     return layer_state_set_keymap(state);
 }
 
-
 __attribute__ ((weak))
 void matrix_scan_keymap(void) {}
 
 void matrix_scan_user(void) {
     #ifdef TIMEOUT_TO_DEFAULT_LAYER
-    switch (get_highest_layer(layer_state)) {
-        default_layer_state:
-            break;
-        GAMING:
-            break;
-        MOUSE:
-            break;
-        default:
-            if(last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
-                layer_move(default_layer_state);
-            }
+    if(get_highest_layer(default_layer_state) != get_highest_layer(layer_state)) {
+        switch (get_highest_layer(layer_state)) {
+            case GAMING:
+                break;
+            case MOUSE:
+                break;
+            default:
+                if(last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
+                    layer_move(default_layer_state);
+                }
 
+        }
     }
     #endif
     matrix_scan_keymap();

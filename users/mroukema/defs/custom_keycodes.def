@@ -118,3 +118,6 @@ CUSTOM_SHIFTABLE_KEYCODE(       KC_KP_DOT_COMMA,
 CUSTOM_KEYCODE(                 DRAG_SCROLL
 )
 #endif
+
+CUSTOM_KEYCODE(                 TO_DEFAULT
+)
