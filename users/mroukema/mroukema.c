@@ -33,6 +33,7 @@ __attribute__ ((weak))
 void pointing_device_init_keymap(void) {}
 
 void pointing_device_init_user(void) {
+    pointing_device_set_cpi(1600);
     set_auto_mouse_layer(MOUSE); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
     set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
     pointing_device_init_keymap();
@@ -43,9 +44,6 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-    //process_auto_mouse(keycode, record);
-    #endif
     switch (keycode) {
         #ifdef POINTING_DEVICE_ENABLE
         case DRAG_SCROLL:
@@ -55,7 +53,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TO_DEFAULT:
             layer_clear();
             layer_move(default_layer_state);
-            break;
+            return false;
         default:
             process_custom_shifted_keys(keycode, record);
     }

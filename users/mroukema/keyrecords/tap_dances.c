@@ -330,9 +330,9 @@ void dance_return_rsthd_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[RETURN_RSTHD].step = dance_step(state);
     switch (dance_state[RETURN_RSTHD].step) {
         case DOUBLE_HOLD:
-            set_single_default_layer(RSTHD);
             layer_clear();
             layer_on(RSTHD);
+            default_layer_set(RSTHD);
             break;
     }
 }
@@ -345,9 +345,9 @@ void dance_enter_gaming_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[ENTER_GAMING].step = dance_step(state);
     switch (dance_state[ENTER_GAMING].step) {
         case DOUBLE_HOLD:
-            set_single_default_layer(GAMING);
             layer_clear();
             layer_on(GAMING);
+            default_layer_set(GAMING);
             break;
     }
 }
