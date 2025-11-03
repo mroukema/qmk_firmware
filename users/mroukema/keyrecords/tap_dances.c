@@ -22,6 +22,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 static tap dance_state[TAP_CODES_COUNT];
 
+uint16_t getModdedArrowKeyByOS(uint16_t arrowKey) {
+    // On windows swap left/right alt arrow with ctl arrow to keep same behavior of jumping between word breaks
+#ifdef OS_DETECTION
+    switch (detected_host_os()) {
+        case OS_WINDOWS:
+            return LCTL(arrowKey);
+        case OS_MACOS:
+        case OS_IOS:
+        default:
+            return LALT(arrowKey);
+    }
+#else
+    return LALT(arrowKey);
+#endif
+}
+
 uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed)
@@ -134,7 +150,7 @@ void dance_left_finished(tap_dance_state_t *state, void *user_data) {
             register_code16(KC_LEFT);
             break;
         case SINGLE_HOLD:
-            register_code16(LALT(KC_LEFT));
+            register_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
         case DOUBLE_TAP:
             register_code16(KC_LEFT);
@@ -146,10 +162,10 @@ void dance_left_finished(tap_dance_state_t *state, void *user_data) {
             break;
         case DOUBLE_HOLD:
             tap_code16(KC_LEFT);
-            register_code16(LALT(KC_LEFT));
+            register_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
         case MORE_HOLDS:
-            register_code16(LALT(KC_LEFT));
+            register_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
     }
 }
@@ -161,7 +177,7 @@ void dance_left_reset(tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_LEFT);
             break;
         case SINGLE_HOLD:
-            unregister_code16(LALT(KC_LEFT));
+            unregister_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
         case DOUBLE_TAP:
             unregister_code16(KC_LEFT);
@@ -170,10 +186,10 @@ void dance_left_reset(tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_LEFT);
             break;
         case DOUBLE_HOLD:
-            unregister_code16(LALT(KC_LEFT));
+            unregister_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
         case MORE_HOLDS:
-            unregister_code16(LALT(KC_LEFT));
+            unregister_code16(getModdedArrowKeyByOS(KC_LEFT));
             break;
     }
     dance_state[TD_ARW_LEFT].step = 0;
@@ -260,7 +276,7 @@ void dance_right_finished(tap_dance_state_t *state, void *user_data) {
             register_code16(KC_RIGHT);
             break;
         case SINGLE_HOLD:
-            register_code16(LALT(KC_RIGHT));
+            register_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
         case DOUBLE_TAP:
             register_code16(KC_RIGHT);
@@ -272,10 +288,10 @@ void dance_right_finished(tap_dance_state_t *state, void *user_data) {
             break;
         case DOUBLE_HOLD:
             tap_code16(KC_RIGHT);
-            register_code16(LALT(KC_RIGHT));
+            register_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
         case MORE_HOLDS:
-            register_code16(LALT(KC_RIGHT));
+            register_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
     }
 }
@@ -287,7 +303,7 @@ void dance_right_reset(tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_RIGHT);
             break;
         case SINGLE_HOLD:
-            unregister_code16(LALT(KC_RIGHT));
+            unregister_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
         case DOUBLE_TAP:
             unregister_code16(KC_RIGHT);
@@ -296,10 +312,10 @@ void dance_right_reset(tap_dance_state_t *state, void *user_data) {
             unregister_code16(KC_RIGHT);
             break;
         case DOUBLE_HOLD:
-            unregister_code16(LALT(KC_RIGHT));
+            unregister_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
         case MORE_HOLDS:
-            unregister_code16(LALT(KC_RIGHT));
+            unregister_code16(getModdedArrowKeyByOS(KC_RIGHT));
             break;
     }
     dance_state[TD_ARW_RIGHT].step = 0;
