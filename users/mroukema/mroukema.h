@@ -16,7 +16,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+
 #include<stdlib.h>
+#ifdef CONSOLE
+#include "print.h"
+#endif
 #include QMK_KEYBOARD_H
 
 #define LAYER_ENTRY KC_TRANSPARENT
