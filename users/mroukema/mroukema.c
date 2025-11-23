@@ -23,6 +23,8 @@ bool set_scrolling = false;
 // Variables to store accumulated scroll values
 float scroll_accumulated_h = 0;
 float scroll_accumulated_v = 0;
+float pointer_accumulated_x = 0;
+float pointer_accumulated_y = 0;
 #endif
 
 __attribute__ ((weak))
@@ -88,6 +90,23 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         // Clear the X and Y values of the mouse report
         mouse_report.x = 0;
         mouse_report.y = 0;
+    } else {
+        int8_t absMouseX = abs(mouse_report.x);
+        int8_t absMouseY = abs(mouse_report.y);
+        if(absMouseX > 0 && absMouseX <= FINE_SCROLL_THRESHOLD) {
+            pointer_accumulated_x += (float)mouse_report.x / FINE_POINTER_DIVISOR_X;
+
+            mouse_report.x = (int8_t)pointer_accumulated_x;
+
+            pointer_accumulated_x -= (int8_t)pointer_accumulated_x;
+        }
+        if(absMouseY > 0 && absMouseY <= FINE_SCROLL_THRESHOLD) {
+            pointer_accumulated_y += (float)mouse_report.y / FINE_POINTER_DIVISOR_Y;
+
+            mouse_report.y = (int8_t)pointer_accumulated_y;
+
+            pointer_accumulated_y -= (int8_t)pointer_accumulated_y;
+        }
     }
     return pointing_device_task_keymap(mouse_report);
 }

@@ -6,6 +6,10 @@ SRC += 		$(USER_PATH)/mroukema.c \
 
 INTROSPECTION_KEYMAP_C = keyrecords/tap_dances.c
 
+ifeq ($(strip $(OS_DETECTION_ENABLE)), yes)
+	OPT_DEFS+=-DOS_DETECTION
+endif
+
 ifneq ($(PLATFORM),CHIBIOS)
     LTO_ENABLE = yes               # Enable link time optimization
 endif

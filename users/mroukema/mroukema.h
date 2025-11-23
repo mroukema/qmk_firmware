@@ -16,7 +16,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
+#include<stdlib.h>
 #include QMK_KEYBOARD_H
+
 #define LAYER_ENTRY KC_TRANSPARENT
 
 #include "keyrecords/layer_names.h"
@@ -40,6 +42,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * https://docs.qmk.fm/features/pointing_device#pointing-device
  */
 
+#define FINE_SCROLL_THRESHOLD 1
+#define FINE_POINTER_DIVISOR_X 5
+#define FINE_POINTER_DIVISOR_Y 5
 #define SCROLL_DIVISOR_H 30.0
 #define SCROLL_DIVISOR_V 30.0
 #endif
