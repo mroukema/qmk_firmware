@@ -37,14 +37,6 @@ void keyboard_post_init_user(void) {
 }
 
 __attribute__ ((weak))
-void pointing_device_init_keymap(void) {}
-
-void pointing_device_init_user(void) {
-    // set auto mouse layer here since layer enum not available at the time AUTO_MOUSE_DEFAULT_LAYER needs to be defined (in config.h of keymap/keyboard)
-    set_auto_mouse_layer(MOUSE);
-    pointing_device_init_keymap();
-}
-__attribute__ ((weak))
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
@@ -67,6 +59,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 #ifdef POINTING_DEVICE_ENABLE
+
+__attribute__ ((weak))
+void pointing_device_init_keymap(void) {}
+
+void pointing_device_init_user(void) {
+    // set auto mouse layer here since layer enum not available at the time AUTO_MOUSE_DEFAULT_LAYER needs to be defined (in config.h of keymap/keyboard)
+    set_auto_mouse_layer(AUTO_MOUSE_LAYER);
+    pointing_device_init_keymap();
+}
 __attribute__ ((weak))
 report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
     return mouse_report;
@@ -132,7 +133,7 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Disable set_scrolling if the current layer is not the AUTO_MOUSE_DEFAULT_LAYER
     #ifdef POINTING_DEVICE_ENABLE
-    if (get_highest_layer(state) != MOUSE) {
+    if (get_highest_layer(state) != AUTO_MOUSE_LAYER) {
         set_scrolling = false;
     }
     #endif

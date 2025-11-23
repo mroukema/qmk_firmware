@@ -46,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * https://docs.qmk.fm/features/pointing_device#pointing-device
  */
 
+#define AUTO_MOUSE_LAYER MOUSE
 #define FINE_SCROLL_THRESHOLD 1
 #define FINE_POINTER_DIVISOR_X 5
 #define FINE_POINTER_DIVISOR_Y 5
