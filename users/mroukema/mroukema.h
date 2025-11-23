@@ -48,8 +48,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define AUTO_MOUSE_LAYER MOUSE
 #define FINE_SCROLL_THRESHOLD 1
-#define FINE_POINTER_DIVISOR_X 5
-#define FINE_POINTER_DIVISOR_Y 5
+#define FINE_POINTER_DIVISOR_X 5.0
+#define FINE_POINTER_DIVISOR_Y 5.0
 #define SCROLL_DIVISOR_H 30.0
 #define SCROLL_DIVISOR_V 30.0
 #endif
