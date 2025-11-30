@@ -33,6 +33,9 @@ void keyboard_post_init_keymap(void) {}
 void keyboard_post_init_user(void) {
     // Ensure RSTHD is default layer since GAMING is placed lower in stack to allow GAMING to tap/toggle into typing layer
     set_single_default_layer(RSTHD);
+    // Set state to the new default
+    layer_state_set(default_layer_state);
+
     keyboard_post_init_keymap();
 }
 
@@ -151,7 +154,7 @@ void matrix_scan_user(void) {
                 break;
             default:
                 if(last_input_activity_elapsed() > TIMEOUT_TO_DEFAULT_LAYER) {
-                    layer_move(default_layer_state);
+                    layer_state_set(default_layer_state);
                 }
 
         }
